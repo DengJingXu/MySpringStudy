@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+<bean id="accountService" class="com.dengjingxu.service.Impl.AccountServiceImpl"></bean>
+<bean id="logger" class="com.dengjingxu.utils.Logger"></bean>
+    <aop:config>
+        <!--配置切入点表达式 ，id属性用于指定唯一的标识。expression属性用于指定表达式的内容
+            此标签写在aop:aspect标签内部只能当前切面使用。
+            它还可以写在aop：aspect外面，此时就变成了所有切面可用
+         -->
+        <aop:pointcut id="pt1" expression="execution(* com.dengjingxu.service.Impl.*.*(..))"/>
+        <aop:aspect id="logAdvice" ref="logger">
+            <!--前置通知：在切入点方法执行之前执行-->
+          <!--  <aop:before method="beforePrintLog" pointcut="execution(* com.dengjingxu.service.Impl.*.*(..))"></aop:before>
+            &lt;!&ndash;后置通知：在切入点方法执行之后执行，它和异常通知只能执行一个&ndash;&gt;
+            <aop:after-returning method="afterReturningPrintLog" pointcut-ref="pt1"></aop:after-returning>
+            &lt;!&ndash;异常通知：在切入点方法执行之后发生异常执行，它和后置通知只能执行一个&ndash;&gt;
+            <aop:after-throwing method="afterThrowingPrintLog" pointcut-ref="pt1"></aop:after-throwing>
+            &lt;!&ndash;最终通知：无论切入点方法是否执行完成，它都会在后面执行&ndash;&gt;
+            <aop:after method="afterPrintLog" pointcut-ref="pt1" ></aop:after>-->
+
+            <!--环绕通知解释请看Logger类-->
+            <aop:around method="aroundPrintLog" pointcut-ref="pt1"></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+
+
+
+</beans>

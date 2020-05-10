@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span th:text="${session.user.studentName}"></span><br/>
+    <div>
+        <form action="account/transfer" method="post">
+            <span>转账对象：</span><input type="text" name="username"/><br/>
+            <span>转账金额：</span><input type="text" name="money"/><br/>
+            <input type="submit" value="确定"/>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--把对象的创建交给spring容器-->
+    <!--spring对bean的管理细节
+        1.创建bean的三种方式
+        2.bean对象的作用范围
+        3.bean的生命周期
+     -->
+
+    <!--创建bean的三种方式-->
+    <!--第一种方式：使用默认构造函数创建，在spring配置文件中使用bean标签，配以id和class属性之后，
+        且没有其他属性和标签时，采用的就是默认构造函数创建bean对象，如果类中没有默认构造函数，则对象无法创建
+    <bean id="saveAccount" class="com.dengjingxu.service.impl.SaveAccountImpl"></bean>
+    -->
+    <!--第二种方式:使用普通工厂中的方法创建对象（使用某个类的中的方法创建对象，并存入spring容器-->
+  <!--  <bean id="instanceFactory" class="com.dengjingxu.factory.InstanceFactory"></bean>
+    <bean id="saveAccount" factory-bean="instanceFactory" factory-method="getSaveAccount"></bean>-->
+
+    <!--第三种方式：使用普通工厂中的静态方法（使用某个类的中的静态方法创建对象，并存入spring容器-->
+   <!-- <bean id="saveAccount" class="com.dengjingxu.factory.StaticFactory" factory-method="getSaveAccount"></bean>-->
+
+    <!--bean的作用域scope
+        作用：指定bean的作用范围
+        取值：常用单例和多例
+             singleton：单例
+             prototype:多例
+             request：作用于web应用request的请求范围
+             session：作用于web应用session的会话范围
+             global-session：作用于集群环境的会话范围，当不是集群环境时，它就是session
+       -->
+  <!--  <bean id="saveAccount" class="com.dengjingxu.service.impl.SaveAccountImpl" scope="prototype"></bean>-->
+
+
+    <!--bean对象的生命周期
+        单例：
+            出生：当容器创建时对象出生
+            活着：只要容器还在，对象一直存在着
+            死亡：容器销毁，对象死亡
+            总结：单例对象的生命周期与容器相同
+        多例：
+            出生：当使用对象时，spring框架创建为我们对象
+            活着：对象只要是在使用过程中就一直活着
+            死亡：当对象长时间不使用，java垃圾回收机器回收
+       -->
+    <bean id="saveAccount" class="com.dengjingxu.service.impl.SaveAccountImpl"
+          scope="singleton" init-method="init" destroy-method="dest"></bean>
+
+</beans>

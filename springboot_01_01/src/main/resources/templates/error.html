@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    访问路径<p th:text="${#httpServletRequest.getRequestURL()}"></p>
+    自定义：<p th:text="${error}"></p>
+</body>
+</html>

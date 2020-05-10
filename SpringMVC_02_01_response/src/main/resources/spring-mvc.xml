@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.dengjingxu"></context:component-scan>
+
+    <!--视图解析器-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--配置前端控制器DispatcherServlet中哪些静态资源不拦截有三种方法
+        1. <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
+        2.<mvc:default-servlet-handler></mvc:default-servlet-handler>
+        3.在web.xml加上默认servlet配置<servlet-mapping>
+                                        <servlet-name>default</servlet-name>
+                                         <url-pattern>*.js</url-pattern>
+                                     </servlet-mapping>
+    -->
+   <!-- <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>-->
+     <mvc:default-servlet-handler></mvc:default-servlet-handler>
+    <!--配置处理器映射器，处理器适配器-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+
+</beans>
